@@ -12,8 +12,23 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final static int RESULT_LOGIN = 1 ;
     boolean logon = false;
     private EditText edUserid;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_LOGIN){
+            if(resultCode == RESULT_OK){
+                String usserid = data.getStringExtra("LOGIN_USERID");
+                String passwd = data.getStringExtra("LOGIN_PASSWD");
+            }else{
+                finish();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(!logon){
             Intent intent = new Intent(this,LoginActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent ,RESULT_LOGIN);
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
