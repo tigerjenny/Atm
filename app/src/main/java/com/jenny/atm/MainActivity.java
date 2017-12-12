@@ -10,24 +10,38 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final static int RESULT_LOGIN = 1 ;
+    private final static int RESULT_LOGIN = 1;
+    private final static int RESULT_USERINFO = 2;
     boolean logon = false;
     private EditText edUserid;
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOGIN){
-            if(resultCode == RESULT_OK){
-                String usserid = data.getStringExtra("LOGIN_USERID");
-                String passwd = data.getStringExtra("LOGIN_PASSWD");
-            }else{
-                finish();
+
+        switch (requestCode) {
+            case RESULT_LOGIN:
+                if(resultCode == RESULT_OK){
+                    String userid = data.getStringExtra("LOGIN_USERID");
+                    String passwd = data.getStringExtra("LOGIN_PASSWD");
+                    Toast.makeText(this, "Login Userid : " + userid ,Toast.LENGTH_LONG).show();
+                }else{
+                    finish();
+                }
+                break;
+            case RESULT_USERINFO :
+                if (resultCode == RESULT_OK) {
+                    String username = data.getStringExtra("USER_NAME");
+                    String userphone = data.getStringExtra("USER_PHONE");
+                    Toast.makeText(this, "UserName : " + username +
+                            "\nUserPhone : " + userphone, Toast.LENGTH_LONG).show();
+                }
+                break;
             }
-        }
     }
 
     @Override
@@ -47,12 +61,15 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,UserInfoActivity.class);
+                startActivityForResult(intent,RESULT_USERINFO);
+
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
-    }
 
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
