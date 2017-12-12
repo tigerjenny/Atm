@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
                     String userid = data.getStringExtra("LOGIN_USERID");
                     String passwd = data.getStringExtra("LOGIN_PASSWD");
                     Toast.makeText(this, "Login Userid : " + userid ,Toast.LENGTH_LONG).show();
+                    getSharedPreferences("atm",MODE_PRIVATE)
+                            .edit()
+                            .putString("PREF_USERID",userid)
+                            .apply();
                 }else{
                     finish();
                 }
