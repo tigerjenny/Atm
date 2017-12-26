@@ -1,5 +1,6 @@
 package com.jenny.atm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,4 +50,11 @@ public class UserInfoActivity extends AppCompatActivity {
         setResult(RESULT_OK,getIntent());
         finish();
     }
+
+    public void address(View view){
+        //Intent intent = new Intent(this,AddrActivity.class);
+        Intent intent = new Intent(this,CityActivity.class);
+        startActivity(intent);
 }
+}
+

@@ -21,16 +21,14 @@ public class Ch8Activity extends AppCompatActivity {
                 android.R.layout.simple_expandable_list_item_1,data);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                        Log.d(TAG,"onItemSelected :" + data[position]);
-                    }
-
-                                              @Override
-                                              public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                              }
-                                          }
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                Log.d(TAG,"onItemSelected :" + data[position]);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        }
         );
     }
 }
